@@ -11,10 +11,6 @@ export default function Index() {
       }}
     >
       <Text className="text-lg my-10 font-rubik-ExtraBold"> Welcome To Homely </Text>
-      <Link href="/sign_in"> Sign In </Link>
-      <Link href="/(root)/(tabs)/explore"> Explore </Link>
-      <Link href="/profile"> Profile </Link>
-      <Link href="/(root)/properties/[id]"> Properties </Link>
     </View>
   );
 }

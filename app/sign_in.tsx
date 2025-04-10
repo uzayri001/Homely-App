@@ -1,12 +1,24 @@
-import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, StyleSheet, Alert } from 'react-native';
 import React from 'react'
 import images from '@/constants/images'
 import icons from '@/constants/icons';
+import { login } from '@/lib/appwrite';
 
+// implementing login function form appwrite.ts file
 const sign_in = () => {
-
   // function to deal with clicking sign in button
-  const handleLogin = () => {}
+  const handleLogin = async () => {
+    const result = await login()
+
+    if (result) {
+      // navigate to home screen (currently don't have a home screen so simply log successful)
+      console.log('Login successful')
+    }
+
+    else {
+      Alert.alert('Error','Failed to Login');
+    }
+  }
 
   return (
 

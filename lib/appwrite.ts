@@ -31,7 +31,7 @@ export async function login() {
         const respone = await account.createOAuth2Token(OAuthProvider.Google, redirectURI);
 
         // check if response exists
-        if (!respone) throw new Error("Failed to Login");
+        if (!respone) throw new Error("No response, Failed to login");
         
         // if OAuth2Token successfully created open web session to continue OAuth process
         const browserResult = await openAuthSessionAsync(respone.toString(), redirectURI);
@@ -46,19 +46,23 @@ export async function login() {
 
         // extract secret and userID from url
         const secret = url.searchParams.get('secret')?.toString();
-        const userID = url.searchParams.get('userID')?.toString();
+        const userId = url.searchParams.get('userId')?.toString();
 
         // if they don't exist throw a error
-        if (!secret || !userID) {
-            throw new Error("Failed to login");
+        if (!secret) {
+            throw new Error("No secret, failed to login");
+        }
+
+        else if (!userId) {
+            throw new Error("No user ID, failed to login");
         }
 
         // if successful create new account session
-        const accountSession = await account.createSession(userID, secret);
+        const accountSession = await account.createSession(userId, secret);
 
         // if no session exists throw a new error
         if (!accountSession) {
-            throw new Error("Failed to login");
+            throw new Error("No account session, Failed to Login");
         }
 
         return true;
