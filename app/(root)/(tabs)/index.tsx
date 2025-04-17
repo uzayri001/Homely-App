@@ -1,10 +1,11 @@
-import { Text, SafeAreaView, ScrollView, View, Image, TouchableOpacity, FlatList } from "react-native";
+import { Text, SafeAreaView, ScrollView, View, Image, TouchableOpacity, FlatList, Button } from "react-native";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import Search from "@/components/Search";
 import { FeaturedCards, Card } from "@/components/Cards";
 import Filters from "@/components/Filters";
 import { useGlobalContext } from "@/lib/global-provider";
+import seed from "@/lib/seed";
 
 export default function Index() {
 
@@ -49,7 +50,7 @@ const user = useGlobalContext();
                 <Text className="text-base font-rubik-Bold text-primary-300"> View All </Text>
               </TouchableOpacity>
             </View>
-            <FlatList data={[1,2,3]} 
+            <FlatList data={[5,6,7]} 
               renderItem={({item}) => <FeaturedCards onPress={() => {}}/>} 
               keyExtractor={(item) => item.toString()}
               horizontal
