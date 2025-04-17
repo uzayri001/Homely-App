@@ -1,6 +1,6 @@
 // setup authentication using appwrite sdk
 
-import {Avatars, Client, Account, OAuthProvider,} from "react-native-appwrite";
+import {Avatars, Client, Account, OAuthProvider, Databases,} from "react-native-appwrite";
 // import the expo-linking module
 import * as Linking from 'expo-linking';
 import { openAuthSessionAsync } from "expo-web-browser";
@@ -9,7 +9,12 @@ export const config = {
     platform: 'com.uzayr001.Homely',
     // defined in env.local file
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
-    projectID: process.env.EXPO_PUBLIC_APPWRITE_ID
+    projectID: process.env.EXPO_PUBLIC_APPWRITE_ID,
+    databaseID: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID,
+    agentsCollectionID: process.env.EXPO_PUBLIC_APPWRITE_AGENTS_COLLECTION_ID,
+    galleriesCollectionID: process.env.EXPO_PUBLIC_APPWRITE_GALLERIES_COLLECTION_ID,
+    reviewsCollectionID: process.env.EXPO_PUBLIC_APPWRITE_REVIEWS_COLLECTION_ID,
+    propertiesCollectionID: process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID
 }
 
 export const client = new Client();
@@ -19,6 +24,7 @@ client.setEndpoint(config.endpoint!)
 
 export const avatar = new Avatars(client);
 export const account = new Account(client);
+export const databases = new Databases(client);
 
 // login function
 export async function login() {
