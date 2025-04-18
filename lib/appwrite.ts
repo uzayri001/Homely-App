@@ -1,6 +1,6 @@
 // setup authentication using appwrite sdk
 
-import {Avatars, Client, Account, OAuthProvider, Databases,} from "react-native-appwrite";
+import {Avatars, Client, Account, OAuthProvider, Databases, Query,} from "react-native-appwrite";
 // import the expo-linking module
 import * as Linking from 'expo-linking';
 import { openAuthSessionAsync } from "expo-web-browser";
@@ -109,5 +109,61 @@ export async function getCurrentUser() {
     } catch (error) {
         console.error(error);
         return null;
+    }
+}
+
+export async function getLatestProperties() {
+    try {
+        // get latest 5 properties
+        const result = await databases.listDocuments(
+            config.databaseID!,
+            config.propertiesCollectionID!,
+            [Query.orderDesc('$createdAt'), Query.limit(5)]
+        );
+
+        // return documents
+        return result.documents;
+
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+export async function getProperties({ filter, query, limit}: {
+    filter: string,
+    query: string,
+    limit?: number
+}) {
+    try {
+        const buildQuery = [Query.orderDesc('$createdAt')];
+        if (filter && filter !== 'All') {
+            buildQuery.push(Query.equal('type', filter));
+        }
+
+        if (query) {
+            buildQuery.push(Query.or([
+                Query.search('name', query),
+                Query.search('address', query),
+                Query.search('type', query),
+            ]));
+        }
+
+        if (limit) {
+            buildQuery.push(Query.limit(limit));
+        }
+
+        const result = await databases.listDocuments(
+            config.databaseID!,
+            config.propertiesCollectionID!,
+            buildQuery
+        );
+
+        // return documents
+        return result.documents;
+        
+    } catch (error) {
+        console.error(error);
+        return [];
     }
 }
