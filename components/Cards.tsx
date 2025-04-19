@@ -22,7 +22,7 @@ export const FeaturedCards = ({ item: {image, rating, name, address, price}, onP
             <Text className="text-xl font-rubik-ExtraBold text-white" numberOfLines={1}> {name} </Text>
             <Text className="text-base font-rubik text-white" numberOfLines={1}> {address} </Text>
             <View className="flex flex-row items-center justify-between w-full">
-                <Text className="text-white text-xl font-rubik-ExtraBold"> R {price} </Text>
+                <Text className="text-white text-xl font-rubik-ExtraBold"> $ {price} </Text>
                 <Image source={icons.heart} className="size-5"/>
             </View>
         </View>
@@ -43,7 +43,7 @@ export const Card = ({ item: {image, rating, name, address, price}, onPress}: Pr
             <Text className="text-base font-rubik-Bold text-blac-300"> {name} </Text>
             <Text className="text-xs font-rubik text-black-200"> {address} </Text>
             <View className="flex flex-row items-center justify-between mt-2">
-                <Text className="text-base text-primary-300 font-rubik-Bold"> R {price} </Text>
+                <Text className="text-base text-primary-300 font-rubik-Bold"> $ {price} </Text>
                 <Image source={icons.heart} className="w-5 h-5 mr-2" tintColor="#191d31"/>
             </View>
         </View>
