@@ -167,3 +167,28 @@ export async function getProperties({ filter, query, limit}: {
         return [];
     }
 }
+
+export async function getPropertyById({ id }: { id: string }) {
+    try {
+      const result = await databases.getDocument(
+        config.databaseID!,
+        config.propertiesCollectionID!,
+        id
+      );
+  
+      // Assuming 'gallery' is the relationship attribute
+      const gallery = result.gallery;
+  
+      // Extract image URLs from the related gallery documents
+      const imageUrls = gallery.map((item: any) => item.image);
+  
+      return {
+        ...result,
+        imageUrls,
+      };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+  

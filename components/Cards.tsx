@@ -12,6 +12,8 @@ interface Props {
 export const FeaturedCards = ({ item: {image, rating, name, address, price}, onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} className="flex flex-col items-start w-60 h-80 relative">
+        {/* When clicked, the onPress prop is called which navigates to the property details page */}
+        {/* This can be seen in the index.tsx file where handlePress routes to /properties/[id] */}
         <Image source={{uri: image}} className="size-full rounded-2xl"/>
         <Image source={images.cardGradient} className="size-full rounded-2xl absolute bottom-0"/>
         <View className="flex flex-row items-center gap-1 absolute top-5 right-5 bg-white/90 px-3 py-1.5 rounded-full">
