@@ -15,6 +15,9 @@ interface Property {
   address?: string;
   type?: string;
   rating?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
 }
 
 interface PropertyParams extends Record<string, string | number> {
@@ -90,6 +93,20 @@ const Property = () => {
             <Text className="text-black-100 text-base font-rubik-Medium">{property?.rating}</Text>
             <Text className="text-black-100 text-base font-rubik-Medium"> ({reviewCount} Reviews)</Text>
           </View>
+            <View className="flex flex-row flex-1 items-center gap-2 mt-7">
+              <View className="bg-primary-200 rounded-full p-1">
+                <Image source={icons.bed} className='size-5'/>
+              </View>
+              <Text className="text-black-100 text-base font-rubik-Medium">{property?.bedrooms} Bedrooms</Text>
+              <View className="bg-primary-200 rounded-full p-1">
+                <Image source={icons.bath} className='size-5'/>
+              </View>
+              <Text className="text-black-100 text-base font-rubik-Medium">{property?.bathrooms} Bathrooms</Text>
+              <View className="bg-primary-200 rounded-full p-1">
+                <Image source={icons.area} className='size-5'/>
+              </View>
+              <Text className="text-black-100 text-base font-rubik-Medium"> {property?.area} sqft</Text>
+            </View>
         </View>
       </ScrollView>
     </SafeAreaView>
