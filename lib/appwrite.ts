@@ -190,5 +190,20 @@ export async function getPropertyById({ id }: { id: string }) {
       console.error(error);
       return null;
     }
-  }
-  
+}
+
+export async function getReviewCountByPropertyId(propertyId: string) {
+    try {
+        const result = await databases.listDocuments(
+            config.databaseID!,
+            config.reviewsCollectionID!,
+            [Query.equal('property', propertyId)]
+        );
+
+        // Return the total number of reviews
+        return result.total;
+    } catch (error) {
+        console.error(error);
+        return 0; // Return 0 if there's an error
+    }
+}
